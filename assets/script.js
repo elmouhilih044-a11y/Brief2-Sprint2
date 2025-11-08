@@ -85,4 +85,7 @@ function update() {
     document.getElementById('step5Content').className = current === 5
         ? 'bg-white p-6 rounded-lg shadow' 
         : 'bg-white p-6 rounded-lg shadow hidden';
+
+         prevBtn.style.display = current === 1 ? 'none' : 'block';
+    nextBtn.style.display = current === 5 ? 'none' : 'block';
 }
