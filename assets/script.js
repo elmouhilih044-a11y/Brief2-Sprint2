@@ -98,23 +98,24 @@ function nextStep() {
         erreurSummary.textContent = "";
     }
 
-    if (current < 5) {
+    if (haserr && current < 5) {
         current++;
         update();
     }
-
-    // if (haserr) {
-    CVdata.personal_info.name = fullname;
-    CVdata.personal_info.poste = poste;
-    CVdata.personal_info.email = email;
-    CVdata.personal_info.phone_number = number;
-    CVdata.personal_info.adress = adress;
-    CVdata.personal_info.summary = summary;
-    localStorage.setItem("data", JSON.stringify(CVdata))
-    // }
-    CVdata.education
-    localStorage.setItem("data", JSON.stringify(CVdata))
 }
+
+//     // if (haserr) {
+//     CVdata.personal_info.name = fullname;
+//     CVdata.personal_info.poste = poste;
+//     CVdata.personal_info.email = email;
+//     CVdata.personal_info.phone_number = number;
+//     CVdata.personal_info.adress = adress;
+//     CVdata.personal_info.summary = summary;
+//     localStorage.setItem("data", JSON.stringify(CVdata))
+//     // }
+//     CVdata.education
+//     localStorage.setItem("data", JSON.stringify(CVdata))
+// }
 
 function prevStep() {
     if (current > 1) {
@@ -202,49 +203,50 @@ function update() {
 
 
 // validation education 
-const Etablissement=document.getElementById("Etablissement").value
-const erreurEtab=document.getElementById("erreurEtab")
-const strRegex = /^[A-Za-z \d\s]+$/
-    let haserr = true
-    if (fullname === "") {
-        fullnameErreur.textContent = "s'il vous plait entrez votre nom"
-        haserr = false
-    }
+const Etablissement = document.getElementById("Etablissement").value
+const erreurEtab = document.getElementById("erreurEtab")
+strRegex = /^[A-Za-z \d\s]+$/
+haserr = true
+if (fullname === "") {
+    fullnameErreur.textContent = "s'il vous plait entrez votre nom"
+    haserr = false
+}
 
-    else if (!strRegex.test(fullname)) {
-        fullnameErreur.textContent = "s'il vous plait entrez votre nom avec les lettres"
-        haserr = false
-    }
-    else {
-        fullnameErreur.textContent = "";
-    }
+else if (!strRegex.test(fullname)) {
+    fullnameErreur.textContent = "s'il vous plait entrez votre nom avec les lettres"
+    haserr = false
+}
+else {
+    fullnameErreur.textContent = "";
+}
 
 
-const Diplome= document.getElementById("Diplome").value
-const erreurDip=document.getElementById("erreurDip")
+const Diplome = document.getElementById("Diplome").value
+const erreurDip = document.getElementById("erreurDip")
 
 const DateD = document.getElementById("DateD").value
-const erreurDateD=document.getElementById("erreurDateD")
+const erreurDateD = document.getElementById("erreurDateD")
 
-const DateF= document.getElementById("DateF").value
-const erreurDateF=document.getElementById("erreurDateF")
-  
+const DateF = document.getElementById("DateF").value
+const erreurDateF = document.getElementById("erreurDateF")
+
 
 // dynamique formulaire(education)
-const btn=document.getElementById("btn")
+
+const btn = document.getElementById("btn")
 
 btn.addEventListener('click', (e) => {
-     e.preventDefault(); 
-     const Etablissement=document.getElementById("Etablissement").value
-     const Diplome= document.getElementById("Diplome").value
-const DateD = document.getElementById("DateD").value
-const DateF= document.getElementById("DateF").value
-  const educationList = document.getElementById("listEducation");
+    e.preventDefault();
+    const Etablissement = document.getElementById("Etablissement").value
+    const Diplome = document.getElementById("Diplome").value
+    const DateD = document.getElementById("DateD").value
+    const DateF = document.getElementById("DateF").value
+    const educationList = document.getElementById("listEducation");
 
-  const li = document.createElement("li");
-  li.className = "w-full flex flex-col";
+    const li = document.createElement("li");
+    li.className = "w-full flex flex-col";
 
-  li.innerHTML = `
+    li.innerHTML = `
         <div class="flex items-center justify-between border border-green-200 w-full bg-bleu-300 text-black-500 p-2 m-2 rounded-lg  shadow-sm">
             <span class="font-medium">Etablissement: <span class="text-gray-500 ">${Etablissement}</span>  <br> Diplome: <span class="text-gray-500">${Diplome}</span> <br> début:<span class="text-gray-500 "> ${DateD}</span> fin:<span class="text-gray-500 ">${DateF}</span>
             </span>
@@ -253,16 +255,61 @@ const DateF= document.getElementById("DateF").value
             </div>
         </div>
     `;
- 
-  li.querySelector("button").addEventListener('click', () => li.remove());
-  educationList.appendChild(li);
-  document.getElementById("Etablissement").value = "";
-  document.getElementById("Diplome").value = "";
-   document.getElementById("DateD").value = "";
+
+    li.querySelector("button").addEventListener('click', () => li.remove());
+    educationList.appendChild(li);
+    document.getElementById("Etablissement").value = "";
+    document.getElementById("Diplome").value = "";
+    document.getElementById("DateD").value = "";
     document.getElementById("DateF").value = "";
 })
 
-// dynamique formulaire(expérience)
+
+
+
+
+// dynamique formulaire(experience)
+const btnE = document.getElementById("btnE")
+
+btnE.addEventListener('click', (e) => {
+    e.preventDefault();
+    const poste = document.getElementById("poste").value
+    const entreprise = document.getElementById("entreprise").value
+    const dateD = document.getElementById("dateD").value
+    const dateF = document.getElementById("dateF").value
+    const description=document.getElementById("description").value
+    const listEsperience = document.getElementById("listEsperience");
+
+    const li = document.createElement("li");
+    li.className = "w-full flex flex-col";
+
+    li.innerHTML = `
+        <div class="flex items-center justify-between border border-green-200 w-full bg-bleu-300 text-black-500 p-2 m-2 rounded-lg  shadow-sm">
+            <span class="font-medium">Poste: <span class="text-gray-500 ">${poste}</span>  <br> Enreprise: <span class="text-gray-500">${entreprise}</span> <br> Début:<span class="text-gray-500 "> ${dateD}</span> Fin:<span class="text-gray-500 ">${dateF}</span> <br>
+            Description:<span class="text-gray-500">${description}</span>
+            </span>
+            <div class="flex gap-2">
+                <button class="btn px-3 py-1 bg-red-600 text-white rounded-md text-sm hover:bg-red-800">supprimer</button>
+            </div>
+        </div>
+    `;
+
+    li.querySelector("button").addEventListener('click', () => li.remove());
+    listEsperience.appendChild(li);
+    document.getElementById("poste").value = "";
+    document.getElementById("entreprise").value = "";
+    document.getElementById("dateD").value = "";
+    document.getElementById("dateF").value = "";
+})
+
+
+
+
+
+
+
+
+
 
 
 
