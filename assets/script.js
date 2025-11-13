@@ -6,11 +6,11 @@ const nextBtn = document.getElementById('next');
 prevBtn.addEventListener('click', prevStep);
 nextBtn.addEventListener('click', nextStep);
 
+const fullname = document.getElementById("fullname").value
+const fullnameErreur = document.getElementById("erreur-fullname")
 function nextStep() {
-    const fullname = document.getElementById("fullname").value
-    const fullnameErreur = document.getElementById("erreur-fullname")
 
-    const strRegex = /^[A-Za-z]+$/
+    const strRegex = /^[A-Za-z\s]+$/
     let haserr = true
     if (fullname === "") {
         fullnameErreur.textContent = "s'il vous plait entrez votre nom"
@@ -27,7 +27,7 @@ function nextStep() {
     const poste = document.getElementById("poste").value
     const posteErreur = document.getElementById("erreurPoste")
 
-    const strrRegex = /^[A-Za-z]+$/
+    const strrRegex = /^[A-Za-z\s]+$/
     haserr = true
 
     if (poste === "") {
@@ -98,7 +98,7 @@ function nextStep() {
         erreurSummary.textContent = "";
     }
 
-    if (haserr && current < 5) {
+    if (current < 5) {
         current++;
         update();
     }
@@ -193,45 +193,165 @@ function update() {
     nextBtn.style.display = current === 5 ? 'none' : 'block';
 }
 
-const CVdata = {
-    personal_info: {
-        name: "",
-        poste: "",
-        picture: "",
-        email: "",
-        phone_number: "",
-        adress: "",
-        summary: "",
-    },
-    education: [],
-    experience: [],
-    skills: [],
-}
 
 
 
 
 
-function loadData() {
-    //     if (CVdata.personal_info.name) {
-    //     document.getElementById("fullname").value = CVdata.personal_info.name;
-    // }
-    // if (CVdata.personal_info.poste) {
-    //     document.getElementById("poste").value = CVdata.personal_info.poste;
-    // }
-    // if (CVdata.personal_info.email) {
-    //     document.getElementById("email").value = CVdata.personal_info.email;
-    // }
-    // if (CVdata.personal_info.phone_number) {
-    //     document.getElementById("number").value = CVdata.personal_info.phone_number;
-    // }
 
-    // if(CVdata.personal_info.adress){
-    //     document.getElementById("adress").value=
-    // }
-    return JSON.parse(localStorage.getItem("data"))
-}
-console.log(loadData())
+
 
 // validation education 
+const Etablissement=document.getElementById("Etablissement").value
+const erreurEtab=document.getElementById("erreurEtab")
+const strRegex = /^[A-Za-z \d\s]+$/
+    let haserr = true
+    if (fullname === "") {
+        fullnameErreur.textContent = "s'il vous plait entrez votre nom"
+        haserr = false
+    }
 
+    else if (!strRegex.test(fullname)) {
+        fullnameErreur.textContent = "s'il vous plait entrez votre nom avec les lettres"
+        haserr = false
+    }
+    else {
+        fullnameErreur.textContent = "";
+    }
+
+
+const Diplome= document.getElementById("Diplome").value
+const erreurDip=document.getElementById("erreurDip")
+
+const DateD = document.getElementById("DateD").value
+const erreurDateD=document.getElementById("erreurDateD")
+
+const DateF= document.getElementById("DateF").value
+const erreurDateF=document.getElementById("erreurDateF")
+  
+
+// dynamique formulaire(education)
+const btn=document.getElementById("btn")
+
+btn.addEventListener('click', (e) => {
+     e.preventDefault(); 
+     const Etablissement=document.getElementById("Etablissement").value
+     const Diplome= document.getElementById("Diplome").value
+const DateD = document.getElementById("DateD").value
+const DateF= document.getElementById("DateF").value
+  const educationList = document.getElementById("listEducation");
+
+  const li = document.createElement("li");
+  li.className = "w-full flex flex-col";
+
+  li.innerHTML = `
+        <div class="flex items-center justify-between border border-green-200 w-full bg-bleu-300 text-black-500 p-2 m-2 rounded-lg  shadow-sm">
+            <span class="font-medium">Etablissement: <span class="text-gray-500 ">${Etablissement}</span>  <br> Diplome: <span class="text-gray-500">${Diplome}</span> <br> début:<span class="text-gray-500 "> ${DateD}</span> fin:<span class="text-gray-500 ">${DateF}</span>
+            </span>
+            <div class="flex gap-2">
+                <button class="btn px-3 py-1 bg-red-600 text-white rounded-md text-sm hover:bg-red-800">supprimer</button>
+            </div>
+        </div>
+    `;
+ 
+  li.querySelector("button").addEventListener('click', () => li.remove());
+  educationList.appendChild(li);
+  document.getElementById("Etablissement").value = "";
+  document.getElementById("Diplome").value = "";
+   document.getElementById("DateD").value = "";
+    document.getElementById("DateF").value = "";
+})
+
+// dynamique formulaire(expérience)
+
+
+
+
+
+
+
+
+
+
+
+// const CVdata = {
+//     personal_info: {
+//         name: "",
+//         poste: "",
+//         picture: "",
+//         email: "",
+//         phone_number: "",
+//         adress: "",
+//         summary: "",
+//     },
+//     education: [],
+//     experience: [],
+//     skills: [],
+// }
+
+
+
+
+
+// function loadData() {
+//     //     if (CVdata.personal_info.name) {
+//     //     document.getElementById("fullname").value = CVdata.personal_info.name;
+//     // }
+//     // if (CVdata.personal_info.poste) {
+//     //     document.getElementById("poste").value = CVdata.personal_info.poste;
+//     // }
+//     // if (CVdata.personal_info.email) {
+//     //     document.getElementById("email").value = CVdata.personal_info.email;
+//     // }
+//     // if (CVdata.personal_info.phone_number) {
+//     //     document.getElementById("number").value = CVdata.personal_info.phone_number;
+//     // }
+
+//     // if(CVdata.personal_info.adress){
+//     //     document.getElementById("adress").value=
+//     // }
+//     return JSON.parse(localStorage.getItem("data"))
+// }
+// console.log(loadData())
+
+
+// let current = 1;
+
+// const prevBtn = document.getElementById('prev');
+// const nextBtn = document.getElementById('next');
+
+// prevBtn.addEventListener('click', prevStep);
+// nextBtn.addEventListener('click', nextStep);
+
+// const CVdata = {
+//     personal_info: {
+//         name: "",
+//         poste: "",
+//         picture: "",
+//         email: "",
+//         phone_number: "",
+//         adress: "",
+//         summary: "",
+//     },
+//     education: {
+//         etablissement: "",
+//         diplome: "",
+//         dateDebut: "",
+//         dateFin: ""
+//     },
+//     experience: {
+//         poste: "",
+//         entreprise: "",
+//         dateDebut: "",
+//         dateFin: "",
+//         description: ""
+//     },
+//     skills: {
+//         langages: "",
+//         frameworks: "",
+//         databases: "",
+//         outils: "",
+//         softSkills: "",
+//         langues: ""
+//     }
+// };
