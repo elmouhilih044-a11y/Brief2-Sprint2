@@ -98,7 +98,7 @@ function nextStep() {
         erreurSummary.textContent = "";
     }
 
-    if (haserr && current < 5) {
+    if (haserr && current < 6) {
         current++;
         update();
     }
@@ -159,14 +159,22 @@ function update() {
         ? 'flex-1 h-1 bg-blue-500 mx-2'
         : 'flex-1 h-1 bg-gray-300 mx-2';
 
-
-
-    document.getElementById('step5').className = current >= 5
+       document.getElementById('step5').className = current >= 5
         ? 'w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold'
         : 'w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold';
 
+    document.getElementById('line5').className = current >= 6
+        ? 'flex-1 h-1 bg-blue-500 mx-2'
+        : 'flex-1 h-1 bg-gray-300 mx-2';
+
+
+
+    // document.getElementById('step6').className = current >= 6
+    //     ? 'w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold'
+    //     : 'w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold';
+
     prevBtn.disabled = current === 1;
-    nextBtn.disabled = current === 5;
+    nextBtn.disabled = current === 6;
 
     document.getElementById('step1Content').className = current === 1
         ? 'bg-white p-6 rounded-lg shadow'
@@ -185,13 +193,17 @@ function update() {
         ? 'bg-white p-6 rounded-lg shadow'
         : 'bg-white p-6 rounded-lg shadow hidden';
 
+         document.getElementById('step5Content').className = current === 5
+        ? 'bg-white p-6 rounded-lg shadow'
+        : 'bg-white p-6 rounded-lg shadow hidden';
 
-    document.getElementById('step5Content').className = current === 5
+
+    document.getElementById('step6Content').className = current === 6
         ? 'bg-white p-6 rounded-lg shadow'
         : 'bg-white p-6 rounded-lg shadow hidden';
 
     prevBtn.style.display = current === 1 ? 'none' : 'block';
-    nextBtn.style.display = current === 5 ? 'none' : 'block';
+    nextBtn.style.display = current === 6 ? 'none' : 'block';
 }
 
 
@@ -301,6 +313,82 @@ btnE.addEventListener('click', (e) => {
     document.getElementById("dateD").value = "";
     document.getElementById("dateF").value = "";
 })
+
+
+
+
+
+ // dynamique formulaire(skills)
+const btnT= document.getElementById("btnT")
+
+btnT.addEventListener('click', (e) => {
+    e.preventDefault();
+    const CT= document.getElementById("CompetencesTechniques")
+
+    CT.className = "w-full flex flex-col";
+
+    CT.innerHTML += `
+        <div class="flex items-center justify-between border border-green-200 w-full bg-bleu-300 text-black-500 p-2 m-2 rounded-lg  shadow-sm item" >
+            <span class="font-medium">Poste: <span class="text-gray-500 ">${document.getElementById("CompetencesTechnique").value}</span>  
+            <div class="flex gap-2">
+                <button class="btn supButton px-3 py-1 bg-red-600 text-white rounded-md text-sm hover:bg-red-800">supprimer</button>
+            </div>
+        </div>
+    `;
+   for (let button of document.getElementsByClassName("supButton")){
+      button.addEventListener('click', (e) => {
+        
+          e.preventDefault()
+          e.target.closest(".item").remove()
+      });
+   }
+     
+})
+
+
+
+// dynamique formulaire(skills2)
+const btnS= document.getElementById("btnS")
+
+btnS.addEventListener('click', (e) => {
+    e.preventDefault();
+    const CTr= document.getElementById("CompetencesTransversals")
+
+    CTr.className= "w-full flex flex-col";
+
+    CTr.innerHTML += `
+        <div class="flex items-center justify-between border border-green-200 w-full bg-bleu-300 text-black-500 p-2 m-2 rounded-lg  shadow-sm item" >
+            <span class="font-medium">Poste: <span class="text-gray-500 ">${document.getElementById("CompetencesTransversal").value}</span>  
+            <div class="flex gap-2">
+                <button class="btn supButton1 px-3 py-1 bg-red-600 text-white rounded-md text-sm hover:bg-red-800">supprimer</button>
+            </div>
+        </div>
+    `;
+   for (let button of document.getElementsByClassName("supButton1")){
+      button.addEventListener('click', (e) => {
+        
+          e.preventDefault()
+          e.target.closest(".item").remove()
+      });
+   }
+     
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
